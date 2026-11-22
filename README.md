@@ -18,7 +18,7 @@ Built with Next.js 15 (App Router, server actions), Prisma 6, PostgreSQL and Tai
 ## Setup
 
 1. Create a database (for example `sms`) in your local Postgres.
-2. Copy `.env.example` to `.env`. Set `DATABASE_URL` and `DIRECT_URL` to your Postgres connection string (the same value locally), and `AUTH_SECRET` to a long random string.
+2. Copy `.env.example` to `.env`. Set `DATABASE_URL` and `DATABASE_URL_UNPOOLED` to your Postgres connection string (the same value locally), and `AUTH_SECRET` to a long random string.
 3. Run:
 
 ```bash
@@ -55,22 +55,14 @@ Without them, SMS sends are written to the server log only.
 
 ## Deploy (Vercel + Neon)
 
-1. **Database:** create a project on [Neon](https://neon.tech). From its connection details, copy the **pooled** connection string and the **direct** (unpooled) one.
-2. **App:** on [Vercel](https://vercel.com), choose *Add New → Project* and import this GitHub repository. Before deploying, add these environment variables:
-
-   | Name | Value |
-   | --- | --- |
-   | `DATABASE_URL` | Neon's pooled connection string |
-   | `DIRECT_URL` | Neon's direct connection string |
-   | `AUTH_SECRET` | a long random string, e.g. from `openssl rand -base64 32` |
-   | `SCHOOL_NAME` | the school's name |
-   | `SCHOOL_CURRENCY` | `RWF` |
-
-3. Deploy. The build runs `prisma migrate deploy`, so the tables are created on the first deploy.
-4. **Demo data (optional):** from your machine, point the seed at Neon once. This **wipes** the database first.
+1. On [Vercel](https://vercel.com), choose *Add New → Project* and import this GitHub repository. Add the environment variables `AUTH_SECRET` (a long random string, e.g. from `openssl rand -base64 32`), `SCHOOL_NAME` and `SCHOOL_CURRENCY` (`RWF`).
+2. In the project's *Storage* tab, create a **Neon** Postgres database and connect it to the project. Vercel then adds `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED` (direct) itself.
+3. Redeploy. The build runs `prisma migrate deploy`, so the tables are created on deploy.
+4. **Demo data (optional):** pull the variables and run the seed once. This **wipes** the database first.
 
 ```bash
-DATABASE_URL="<pooled url>" DIRECT_URL="<direct url>" npm run db:seed
+npx vercel env pull .env.production.local
+npx dotenv-cli -e .env.production.local -- npm run db:seed
 ```
 
 Every push to `main` deploys again.

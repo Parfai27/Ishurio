@@ -6,7 +6,7 @@ datasource db {
   provider = "postgresql"
   url       = env("DATABASE_URL")
   // Migrations need a direct (unpooled) connection; locally it is the same URL as DATABASE_URL.
-  directUrl = env("DIRECT_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 enum Role {
