@@ -38,7 +38,12 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <p className="text-[13px] text-stone-400">© 2026 Ishurio</p>
+        <p className="flex flex-wrap gap-x-4 gap-y-1 text-[13px] text-stone-400">
+          <span>© 2026 Ishurio</span>
+          <Link href="/privacy" className="hover:text-ink">Privacy</Link>
+          <Link href="/terms" className="hover:text-ink">Terms</Link>
+          <Link href="/cookies" className="hover:text-ink">Cookies</Link>
+        </p>
       </section>
 
       <aside className="relative hidden overflow-hidden bg-sky lg:block" aria-label="What each login can do">
