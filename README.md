@@ -58,12 +58,7 @@ Without them, SMS sends are written to the server log only.
 1. On [Vercel](https://vercel.com), choose *Add New → Project* and import this GitHub repository. Add the environment variables `AUTH_SECRET` (a long random string, e.g. from `openssl rand -base64 32`), `SCHOOL_NAME` and `SCHOOL_CURRENCY` (`RWF`).
 2. In the project's *Storage* tab, create a **Neon** Postgres database and connect it to the project. Vercel then adds `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED` (direct) itself.
 3. Redeploy. The build runs `prisma migrate deploy`, so the tables are created on deploy.
-4. **Demo data (optional):** pull the variables and run the seed once. This **wipes** the database first.
-
-```bash
-npx vercel env pull .env.production.local
-npx dotenv-cli -e .env.production.local -- npm run db:seed
-```
+4. **Demo data (optional):** set `SEED_DEMO` to `true` in Vercel and redeploy. The build loads the demo data only if the database has no users yet, so it never wipes data in use. Remove the variable afterwards.
 
 Every push to `main` deploys again.
 
