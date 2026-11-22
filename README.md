@@ -1,4 +1,6 @@
-# School Management System
+# Ishurio
+
+School management software for schools in Rwanda.
 
 A web app for running a school's attendance, results and report cards, fees and receipts, and parent messaging (in the app and by SMS).
 
@@ -16,7 +18,7 @@ Built with Next.js 15 (App Router, server actions), Prisma 6, PostgreSQL and Tai
 ## Setup
 
 1. Create a database (for example `sms`) in your local Postgres.
-2. In `.env`, set `DATABASE_URL` to your Postgres connection string and `AUTH_SECRET` to a long random string.
+2. Copy `.env.example` to `.env`. Set `DATABASE_URL` and `DIRECT_URL` to your Postgres connection string (the same value locally), and `AUTH_SECRET` to a long random string.
 3. Run:
 
 ```bash
@@ -50,6 +52,28 @@ AT_SENDER_ID=""             # optional approved sender ID
 ```
 
 Without them, SMS sends are written to the server log only.
+
+## Deploy (Vercel + Neon)
+
+1. **Database:** create a project on [Neon](https://neon.tech). From its connection details, copy the **pooled** connection string and the **direct** (unpooled) one.
+2. **App:** on [Vercel](https://vercel.com), choose *Add New → Project* and import this GitHub repository. Before deploying, add these environment variables:
+
+   | Name | Value |
+   | --- | --- |
+   | `DATABASE_URL` | Neon's pooled connection string |
+   | `DIRECT_URL` | Neon's direct connection string |
+   | `AUTH_SECRET` | a long random string, e.g. from `openssl rand -base64 32` |
+   | `SCHOOL_NAME` | the school's name |
+   | `SCHOOL_CURRENCY` | `RWF` |
+
+3. Deploy. The build runs `prisma migrate deploy`, so the tables are created on the first deploy.
+4. **Demo data (optional):** from your machine, point the seed at Neon once. This **wipes** the database first.
+
+```bash
+DATABASE_URL="<pooled url>" DIRECT_URL="<direct url>" npm run db:seed
+```
+
+Every push to `main` deploys again.
 
 ## Before selling this to a school
 
