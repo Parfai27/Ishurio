@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# School Management System
 
-## Getting Started
+A web app for running a school's attendance, results and report cards, fees and receipts, and parent messaging (in the app and by SMS).
 
-First, run the development server:
+Built with Next.js 15 (App Router, server actions), Prisma 6, PostgreSQL and Tailwind CSS 4.
+
+## Who can do what
+
+| Role | Access |
+| --- | --- |
+| Admin | Everything: students, classes, users, terms and subjects, attendance, results, fees, messages |
+| Teacher | Attendance and results for any class, and messages to a class or to staff |
+| Bursar (accountant) | Fees: bill classes, record payments, print receipts, plus messages |
+| Parent | Their own children's attendance, results, report cards, fee balance, and school notices |
+
+## Setup
+
+1. Create a database (for example `sms`) in your local Postgres.
+2. In `.env`, set `DATABASE_URL` to your Postgres connection string and `AUTH_SECRET` to a long random string.
+3. Run:
 
 ```bash
+npm install
+npm run db:migrate
+npm run db:seed
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Demo accounts (after seeding)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Every demo account uses the password `demo1234`, which is set in `prisma/seed.ts`.
 
-## Learn More
+- `admin@school.test`: administrator
+- `teacher@school.test`: teacher (P4 A)
+- `bursar@school.test`: bursar
+- `parent@school.test`: parent of one P4 A student
 
-To learn more about Next.js, take a look at the following resources:
+Running `npm run db:seed` again **wipes all data** and reloads the demo data.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## SMS
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Messages can also be sent as SMS through [Africa's Talking](https://africastalking.com). Set these in `.env`:
 
-## Deploy on Vercel
+```
+AT_USERNAME="sandbox"       # or your live username
+AT_API_KEY="..."
+AT_SENDER_ID=""             # optional approved sender ID
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Without them, SMS sends are written to the server log only.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Before selling this to a school
+
+- Change every demo password, and set a strong `AUTH_SECRET`.
+- Set `SCHOOL_NAME` and `SCHOOL_CURRENCY` in `.env`. Each school currently needs its own deployment and database.
+- Set up daily database backups.

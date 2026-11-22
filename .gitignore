@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+!.env.example
+
+# design kit checks, screenshots and local tool settings
+.taste-skill/
+shots/
+.claude/

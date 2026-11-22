@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en" data-type="software" data-radius="soft" data-ground="sky" data-buttons="solid" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ishurio: photograph credits</title>
+<meta name="description" content="The photographers, licences and source pages of the photographs on the Ishurio website.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ishurio: school software for Rwandan schools">
+<meta property="og:description" content="Attendance, marks, report cards, fee receipts and parent notices in one web app.">
+<meta property="og:image" content="share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f8f8f8">
+<!-- <link rel="canonical" href="https://[the client's domain]/"> : add once the domain is known -->
+<meta name="site-kind" content="software">
+<meta name="page-type" content="software">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..700&family=JetBrains+Mono:wght@400..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<style>
+:root {
+  --p-bg: #f8f8f8; --p-surface: #eeeeee; --p-ink: #0a0a0a; --p-muted: #6a6a6a;
+  --p-accent: #1f6b3a; --p-accent-ink: #ffffff; --p-action: #1f6b3a; --p-action-ink: #ffffff;
+  --p-inv-bg: #0a0a0a; --p-inv-surface: #171717; --p-inv-ink: #f8f8f8; --p-inv-muted: #939393;
+  --p-inv-accent: #1f6b3a; --p-inv-accent-ink: #ffffff; --p-inv-action: #1f6b3a; --p-inv-action-ink: #ffffff;
+  --font-display: "Manrope", system-ui, sans-serif;
+  --font-text: "Manrope", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.035em;
+  --display-tracking-xl: -0.045em;
+  --ly-scale: 0.97;
+}
+</style>
+<link rel="stylesheet" href="assets/ui/base.css">
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script src="assets/backgrounds/backgrounds.js"></script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js">
+<link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/line-carries-colour/moment.js">
+<!-- page CSS: the head row beside an app window, the window itself (sections-library.md app-frame),
+     and the small school screens inside the card panels; one --p-h for the card group -->
+<style>
+  .ui { --fx-bg: #ffffff; --fx-ink: #0a0a0a; --fx-muted: #646464; --fx-accent: #1f6b3a; --fx-accent-ink: #fff; --ui-font: var(--font-text); --ui-radius: 12px; font-family: var(--font-text); }
+
+  /* hero: the product hero's head row, with the app window on the lit stage */
+  @media (min-width: 1024px) {
+    .hero--product:has(.hero__stage > .app) .hero__head { grid-template-rows: auto auto; row-gap: var(--s-5); }
+    .hero--product:has(.hero__stage > .app) .hero__head > :first-child { display: contents; }
+    .hero--product:has(.hero__stage > .app) .hero__head h1 { grid-column: 1 / span 7; grid-row: 1 / span 2; align-self: end; margin: 0; }
+    .hero--product:has(.hero__stage > .app) .hero__head .hero__lead { grid-column: 9 / -1; grid-row: 1; align-self: end; margin: 0; max-width: none; }
+    .hero--product:has(.hero__stage > .app) .hero__head > .btn-row { grid-column: 9 / -1; grid-row: 2; justify-content: flex-start; }
+  }
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .hero--product:has(.hero__stage > .app) .hero__head h1 { grid-column: 1 / span 6; }
+    .hero--product:has(.hero__stage > .app) .hero__head .hero__lead,
+    .hero--product:has(.hero__stage > .app) .hero__head > .btn-row { grid-column: 7 / -1; }
+  }
+  .hero__stage:has(> .app) { padding: 40px 48px 0; display: flex; }
+  @media (max-width: 1023px) { .hero__stage:has(> .app) { padding: 24px 24px 0; } }
+  @media (max-width: 639px) { .hero--product .hero__stage:has(> .app) { aspect-ratio: auto; flex: 1 1 auto; min-height: 260px; padding: 16px 16px 0; } }
+
+  /* the app window: classes beside the open register */
+  .app.ui { flex: 1 1 auto; align-self: stretch; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-rows: auto minmax(0, 1fr);
+    background: var(--u-bg); border: 1px solid var(--u-border); border-bottom: 0; border-radius: var(--u-r) var(--u-r) 0 0; box-shadow: var(--u-shadow); overflow: hidden; color: var(--u-ink); font-size: 13px; line-height: 18px; }
+  .app__bar { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 16px; border-bottom: 1px solid var(--u-line); }
+  .app__dots { display: flex; gap: 6px; } .app__dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--u-fill-3); }
+  .app__crumb { display: flex; align-items: center; gap: 8px; color: var(--u-muted); }
+  .app__crumb b { color: var(--u-ink); font-weight: 500; }
+  .app__crumb svg, .sk-ic { width: 16px; height: 16px; flex: none; }
+  .app__search { margin-left: auto; display: flex; align-items: center; gap: 8px; width: 220px; height: 28px; padding: 0 10px; border-radius: 8px; background: var(--u-fill); color: var(--u-muted); }
+  .app > .app__pane { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+  .app > .app__pane + .app__pane { border-left: 1px solid var(--u-line); }
+  .app > .app__pane::after { content: ""; position: absolute; inset: auto 0 0 0; height: 64px; background: linear-gradient(transparent, var(--u-bg)); pointer-events: none; }
+  .pane__head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 16px 20px 12px; }
+  .pane__title { font-size: 15px; font-weight: 500; }
+  .pane__meta { color: var(--u-muted); font-size: 12px; }
+  .cls { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 10px 20px; border-top: 1px solid var(--u-line); }
+  .cls__tag { display: grid; place-items: center; height: 28px; border-radius: 8px; background: var(--u-fill-2); font-weight: 500; font-size: 12px; }
+  .cls__who { display: grid; min-width: 0; } .cls__who span { color: var(--u-muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cls.is-open { background: var(--u-tint); } .cls.is-open .cls__tag { background: var(--u-accent); color: var(--u-accent-ink); }
+  .chip { display: inline-flex; align-items: center; height: 22px; padding: 0 8px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap; background: var(--u-fill-2); color: var(--u-text-2); }
+  .chip--done { background: color-mix(in oklab, #16a34a 14%, white); color: #166534; }
+  .chip--late { background: color-mix(in oklab, #d97706 16%, white); color: #92400e; }
+  .chip--out { background: color-mix(in oklab, #dc2626 13%, white); color: #991b1b; }
+  .reg { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 9px 20px; border-top: 1px solid var(--u-line); }
+  .reg__seg { display: flex; gap: 4px; }
+  .reg__seg span { height: 26px; padding: 0 10px; display: grid; place-items: center; border-radius: 7px; border: 1px solid var(--u-line-2); color: var(--u-muted); font-size: 12px; }
+  .reg__seg .on-p { background: #15803d; border-color: #15803d; color: #fff; }
+  .reg__seg .on-l { background: #d97706; border-color: #d97706; color: #fff; }
+  .reg__seg .on-a { background: #dc2626; border-color: #dc2626; color: #fff; }
+  .pane__foot { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-top: 1px solid var(--u-line); }
+  .ui-btn { display: inline-flex; align-items: center; height: 30px; padding: 0 14px; border-radius: 8px; background: var(--u-ink); color: var(--u-bg); font-weight: 500; font-size: 13px; }
+  @media (min-width: 1024px) and (max-width: 1279px) { .app.ui { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); } }
+  @media (max-width: 1023px) {
+    .app.ui { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+    .app > .app__pane--list { display: none; }
+    .app > .app__pane + .app__pane { border-left: 0; }
+    .app__search { display: none; }
+  }
+  @media (max-width: 639px) { .reg__seg span:nth-child(n+3) { display: none; } .app__crumb .hide-sm { display: none; } }
+
+  /* feature cards: one panel height for the group */
+  #features .panel { --p-h: 300px; }
+  @media (max-width: 639px) { #features .panel { --p-h: 200px; } }
+  .sk { width: 100%; border-radius: var(--u-r); background: var(--u-bg); border: 1px solid var(--u-border); box-shadow: var(--u-shadow); color: var(--u-ink); font-size: 13px; line-height: 18px; overflow: hidden; }
+  .sk__head { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--u-line); }
+  .sk__head b { font-weight: 500; } .sk__head span { margin-left: auto; color: var(--u-muted); font-size: 12px; }
+  .sk__row { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 9px 16px; border-top: 1px solid var(--u-line); }
+  .sk__row:first-of-type { border-top: 0; }
+  .sk__row .n { color: var(--u-muted); font-variant-numeric: tabular-nums; }
+  .sk__row .v { font-variant-numeric: tabular-nums; }
+  .sk__row .g { width: 22px; text-align: right; font-weight: 500; }
+  .sk__row.is-mark { background: var(--u-tint); box-shadow: inset 2px 0 0 var(--u-accent); }
+  .sk__kv { display: flex; justify-content: space-between; gap: 12px; padding: 8px 16px; }
+  .sk__kv span:first-child { color: var(--u-muted); }
+  .sk__total { display: flex; justify-content: space-between; gap: 12px; padding: 12px 16px; border-top: 1px dashed var(--u-line-2); font-size: 15px; font-weight: 500; }
+  .sk__file { display: flex; align-items: center; gap: 10px; margin: 12px 16px 16px; padding: 10px 12px; border-radius: 10px; background: var(--u-fill); }
+  .sk__file img { width: 28px; height: 28px; }
+  .sk__file span { color: var(--u-muted); font-size: 12px; display: block; }
+  .sk__field { margin: 12px 16px 0; } .sk__field span { display: block; color: var(--u-muted); font-size: 12px; margin-bottom: 4px; }
+  .sk__field p { margin: 0; padding: 8px 10px; border: 1px solid var(--u-line-2); border-radius: 8px; }
+  .sk__toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 12px 16px; }
+  .sk__switch { width: 32px; height: 18px; border-radius: 999px; background: var(--u-accent); position: relative; flex: none; }
+  .sk__switch::after { content: ""; position: absolute; top: 2px; right: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; }
+
+  /* the parent portal on the inverse ground */
+  #parents .frame--split { background: color-mix(in oklab, var(--p-inv-ink) 8%, var(--p-inv-bg)); border-color: color-mix(in oklab, var(--p-inv-ink) 12%, transparent); }
+  .pp { width: min(360px, 100%); }
+  .pp__kid { padding: 16px; }
+  .pp__kid b { font-size: 15px; font-weight: 500; display: block; }
+  .pp__kid span { color: var(--u-muted); font-size: 12px; }
+  .pp__stats { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--u-line); }
+  .pp__stats div { padding: 12px 16px; } .pp__stats div + div { border-left: 1px solid var(--u-line); }
+  .pp__stats span { display: block; color: var(--u-muted); font-size: 12px; } .pp__stats b { font-size: 18px; font-weight: 500; }
+  .pp__note { padding: 12px 16px; border-top: 1px solid var(--u-line); }
+  .pp__note b { font-weight: 500; display: block; } .pp__note p { margin: 2px 0 0; color: var(--u-text-2); }
+  .pp__note span { color: var(--u-muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<!-- type: software
+     deal: hero product (the app window on the lit stage), nav nav-centre (dealt nav-cards; no client photographs, so dealt again per sections.md 2),
+           close close-type, footer footer-columns, rhythm space, buttons solid, mark dots, ground sky, palette mint-pink-accounts, type manrope
+     moments: line-carries-colour on #parents (ground-inverse) -->
+
+<header class="nav nav--centre">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo" href="#top"><span class="mark" data-mark="dots" aria-hidden="true"></span>Ishurio</a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item"><a class="nav__link" href="#features">Features</a></div>
+      <div class="nav__item"><a class="nav__link" href="#parents">Parents</a></div>
+      <div class="nav__item"><a class="nav__link" href="#questions">Questions</a></div>
+      <div class="nav__item"><a class="nav__link" href="#contact">Contact</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="nav__link" href="/login">Sign in</a>
+      <a class="btn btn--primary" href="mailto:hello@ishurio.example?subject=Ishurio%20demo">Request a demo</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <p><a class="link" href="index.html">Ishurio</a></p>
+  <section class="credits-list" id="credits" aria-labelledby="credits-h">
+    <h1 id="credits-h">Photograph credits</h1>
+    <ul>
+      <li><a href="https://commons.wikimedia.org/wiki/File:OLPC_classroom_teaching.JPG">RudolfSimon</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="footer closing" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--type">
+      <div class="section-head">
+        <h2 id="close-h">See Ishurio with your own classes</h2>
+      </div>
+      <a class="btn btn--primary btn--xl btn--wide" href="mailto:hello@ishurio.example?subject=Ishurio%20demo">Request a demo<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="#top"><span class="mark" data-mark="dots" aria-hidden="true"></span>Ishurio</a>
+          <p class="footer__lede">The register, marks and fees in one place.</p>
+        </div>
+        <div class="span-2 footer__col"><h3>Features</h3><ul><li><a href="#features">Report cards</a></li><li><a href="#features">Fees</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Parents</h3><ul><li><a href="#parents">Parent portal</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Questions</h3><ul><li><a href="#questions">Head teachers</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Contact</h3><ul><li><a href="/login">Sign in</a></li><li><a href="mailto:hello@ishurio.example">Email us</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Ishurio</span>
+        <div class="socials"></div>
+        <a class="credits" href="#credits">Photographs via Wikimedia Commons</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
+</body>
+</html>

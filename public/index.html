@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en" data-type="software" data-radius="soft" data-ground="sky" data-buttons="solid" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ishurio: school software for schools in Rwanda</title>
+<meta name="description" content="Attendance, marks, report cards, fee receipts and parent notices in one web app, with separate logins for the head, teachers, the bursar and parents.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ishurio: school software for schools in Rwanda">
+<meta property="og:description" content="Attendance, marks, report cards, fee receipts and parent notices in one web app.">
+<meta property="og:image" content="share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f8f8f8">
+<!-- <link rel="canonical" href="https://[the client's domain]/"> : add once the domain is known -->
+<meta name="site-kind" content="software">
+<meta name="page-type" content="software">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..700&family=JetBrains+Mono:wght@400..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<style>
+:root {
+  --p-bg: #f8f8f8; --p-surface: #eeeeee; --p-ink: #0a0a0a; --p-muted: #6a6a6a;
+  --p-accent: #1f6b3a; --p-accent-ink: #ffffff; --p-action: #1f6b3a; --p-action-ink: #ffffff;
+  --p-inv-bg: #0a0a0a; --p-inv-surface: #171717; --p-inv-ink: #f8f8f8; --p-inv-muted: #939393;
+  --p-inv-accent: #1f6b3a; --p-inv-accent-ink: #ffffff; --p-inv-action: #1f6b3a; --p-inv-action-ink: #ffffff;
+  --font-display: "Manrope", system-ui, sans-serif;
+  --font-text: "Manrope", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.035em;
+  --display-tracking-xl: -0.045em;
+  --ly-scale: 0.97;
+}
+</style>
+<link rel="stylesheet" href="assets/ui/base.css">
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script src="assets/backgrounds/backgrounds.js"></script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js">
+<link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/line-carries-colour/moment.js">
+<!-- page CSS: the head row beside an app window, the window itself (sections-library.md app-frame),
+     and the small school screens inside the card panels; one --p-h for the card group -->
+<style>
+  .ui { --fx-bg: #ffffff; --fx-ink: #0a0a0a; --fx-muted: #646464; --fx-accent: #1f6b3a; --fx-accent-ink: #fff; --ui-font: var(--font-text); --ui-radius: 12px; font-family: var(--font-text); }
+
+  /* hero: the product hero's head row, with the app window on the lit stage */
+  @media (min-width: 1024px) {
+    .hero--product:has(.hero__stage .app) .hero__head { grid-template-rows: auto auto; row-gap: var(--s-5); }
+    .hero--product:has(.hero__stage .app) .hero__head > :first-child { display: contents; }
+    .hero--product:has(.hero__stage .app) .hero__head h1 { grid-column: 1 / span 7; grid-row: 1 / span 2; align-self: end; margin: 0; }
+    .hero--product:has(.hero__stage .app) .hero__head .hero__lead { grid-column: 9 / -1; grid-row: 1; align-self: end; margin: 0; max-width: none; }
+    .hero--product:has(.hero__stage .app) .hero__head > .btn-row { grid-column: 9 / -1; grid-row: 2; justify-content: flex-start; }
+  }
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .hero--product:has(.hero__stage .app) .hero__head h1 { grid-column: 1 / span 6; }
+    .hero--product:has(.hero__stage .app) .hero__head .hero__lead,
+    .hero--product:has(.hero__stage .app) .hero__head > .btn-row { grid-column: 7 / -1; }
+  }
+  @media (max-width: 1023px) { .stage > .app.ui { left: 24px; right: 24px; top: 24px; } }
+  @media (max-width: 639px) { .hero--product .hero__stage:has(.app) { aspect-ratio: auto; flex: 1 1 0; min-height: 200px; margin-bottom: 0; } .stage > .app.ui { left: 16px; right: 16px; top: 16px; } }
+
+  /* the app window: classes beside the open register */
+  .stage > .app.ui { left: 48px; right: 48px; top: 40px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-rows: auto minmax(0, 1fr);
+    background: var(--u-bg); border: 1px solid var(--u-border); border-bottom: 0; border-radius: var(--u-r) var(--u-r) 0 0; box-shadow: var(--u-shadow); color: var(--u-ink); font-size: 13px; line-height: 18px; }
+  .app__bar { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 16px; border-bottom: 1px solid var(--u-line); }
+  .app__dots { display: flex; gap: 6px; } .app__dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--u-fill-3); }
+  .app__crumb { display: flex; align-items: center; gap: 8px; color: var(--u-muted); }
+  .app__crumb b { color: var(--u-ink); font-weight: 500; }
+  .app__crumb svg, .sk-ic { width: 16px; height: 16px; flex: none; }
+  .app__search { margin-left: auto; display: flex; align-items: center; gap: 8px; width: 220px; height: 28px; padding: 0 10px; border-radius: 8px; background: var(--u-fill); color: var(--u-muted); }
+  .app > .app__pane { position: relative; min-width: 0; }
+  .app > .app__pane + .app__pane { border-left: 1px solid var(--u-line); }
+  .pane__head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 16px 20px 12px; }
+  .pane__title { font-size: 15px; font-weight: 500; }
+  .pane__meta { color: var(--u-muted); font-size: 12px; }
+  .cls { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 10px 20px; border-top: 1px solid var(--u-line); }
+  .cls__tag { display: grid; place-items: center; height: 28px; border-radius: 8px; background: var(--u-fill-2); font-weight: 500; font-size: 12px; }
+  .cls__who { display: grid; min-width: 0; } .cls__who span { color: var(--u-muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cls.is-open { background: var(--u-tint); } .cls.is-open .cls__tag { background: var(--u-accent); color: var(--u-accent-ink); }
+  .chip { display: inline-flex; align-items: center; height: 22px; padding: 0 8px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap; background: var(--u-fill-2); color: var(--u-text-2); }
+  .chip--done { background: color-mix(in oklab, #16a34a 14%, white); color: #166534; }
+  .chip--late { background: color-mix(in oklab, #d97706 16%, white); color: #92400e; }
+  .chip--out { background: color-mix(in oklab, #dc2626 13%, white); color: #991b1b; }
+  .reg { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 9px 20px; border-top: 1px solid var(--u-line); }
+  .reg__seg { display: flex; gap: 4px; }
+  .reg__seg span { height: 26px; padding: 0 10px; display: grid; place-items: center; border-radius: 7px; border: 1px solid var(--u-line-2); color: var(--u-muted); font-size: 12px; }
+  .reg__seg .on-p { background: #15803d; border-color: #15803d; color: #fff; }
+  .reg__seg .on-l { background: #d97706; border-color: #d97706; color: #fff; }
+  .reg__seg .on-a { background: #dc2626; border-color: #dc2626; color: #fff; }
+  .pane__foot { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-top: 1px solid var(--u-line); }
+  .ui-btn { display: inline-flex; align-items: center; height: 30px; padding: 0 14px; border-radius: 8px; background: var(--u-ink); color: var(--u-bg); font-weight: 500; font-size: 13px; }
+  @media (min-width: 1024px) and (max-width: 1279px) { .app.ui { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); } }
+  @media (max-width: 1023px) {
+    .app.ui { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+    .app > .app__pane--list { display: none; }
+    .app > .app__pane + .app__pane { border-left: 0; }
+    .app__search { display: none; }
+  }
+  @media (max-width: 639px) { .reg__seg span:nth-child(n+3) { display: none; } .app__crumb .hide-sm { display: none; } }
+
+  /* feature cards: one panel height for the group */
+  #features .panel { --p-h: 300px; }
+  @media (max-width: 639px) { #features .panel { --p-h: 196px; } #features .stage { --fade-h: 0px; } #features .sm-off { display: none; } }
+  .sk { width: 100%; border-radius: var(--u-r); background: var(--u-bg); border: 1px solid var(--u-border); box-shadow: var(--u-shadow); color: var(--u-ink); font-size: 13px; line-height: 18px; overflow: hidden; }
+  .sk__head { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--u-line); }
+  .sk__head b { font-weight: 500; } .sk__head span { margin-left: auto; color: var(--u-muted); font-size: 12px; }
+  .sk__row { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 9px 16px; border-top: 1px solid var(--u-line); }
+  .sk__row:first-of-type { border-top: 0; }
+  .sk__row .n { color: var(--u-muted); font-variant-numeric: tabular-nums; }
+  .sk__row .v { font-variant-numeric: tabular-nums; }
+  .sk__row .g { width: 22px; text-align: right; font-weight: 500; }
+  .sk__row.is-mark { background: var(--u-tint); box-shadow: inset 2px 0 0 var(--u-accent); }
+  .sk__kv { display: flex; justify-content: space-between; gap: 12px; padding: 8px 16px; }
+  .sk__kv span:first-child { color: var(--u-muted); }
+  .sk__total { display: flex; justify-content: space-between; gap: 12px; padding: 12px 16px; border-top: 1px dashed var(--u-line-2); font-size: 15px; font-weight: 500; }
+  .sk__file { display: flex; align-items: center; gap: 10px; margin: 12px 16px 16px; padding: 10px 12px; border-radius: 10px; background: var(--u-fill); }
+  .sk__file img { width: 28px; height: 28px; }
+  .sk__file span { color: var(--u-muted); font-size: 12px; display: block; }
+  .sk__field { margin: 12px 16px 0; } .sk__field span { display: block; color: var(--u-muted); font-size: 12px; margin-bottom: 4px; }
+  .sk__field p { margin: 0; padding: 8px 10px; border: 1px solid var(--u-line-2); border-radius: 8px; }
+  .sk__toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 12px 16px; }
+  .sk__switch { width: 32px; height: 18px; border-radius: 999px; background: var(--u-accent); position: relative; flex: none; }
+  .sk__switch::after { content: ""; position: absolute; top: 2px; right: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; }
+
+  .sk__row--th { color: var(--u-muted); font-size: 12px; padding-block: 6px; background: var(--u-fill); }
+  .sk__row--fee { grid-template-columns: minmax(0, 1fr) auto auto; }
+  .sk__row--fee em { font-style: normal; color: var(--u-muted); font-size: 12px; margin-left: 8px; }
+  .sk__paid { margin: 12px 16px; padding: 10px 12px; border-radius: 10px; background: color-mix(in oklab, #16a34a 12%, white); color: #166534; font-weight: 500; }
+  .sk__sent { padding: 12px 16px 4px; border-top: 1px solid var(--u-line); color: var(--u-muted); font-size: 12px; }
+  #parents .frame--fill { align-items: flex-start; }
+  .sc-photo { --ratio: 92%; }
+  @media (max-width: 639px) { .sc-photo { --ratio: 66%; } }
+  .q-list { margin-top: var(--s-6); }
+  #questions .faq__item h3 { display: flex; align-items: flex-start; gap: var(--s-3); }
+  .q-ic { width: 24px; height: 24px; flex: none; margin-top: 2px; color: var(--p-accent); }
+  @media (max-width: 639px) { .q-list { margin-top: var(--s-6); } }
+  @media (min-width: 640px) and (max-width: 1023px) { #questions { --h: 2 } }
+
+  /* the parent portal on the inverse ground */
+  #parents .frame--split { background: color-mix(in oklab, var(--p-inv-ink) 8%, var(--p-inv-bg)); border-color: color-mix(in oklab, var(--p-inv-ink) 12%, transparent); }
+  .pp { width: min(360px, 100%); }
+  .pp__kid { padding: 16px; }
+  .pp__kid b { font-size: 15px; font-weight: 500; display: block; }
+  .pp__kid span { color: var(--u-muted); font-size: 12px; }
+  .pp__stats { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--u-line); }
+  .pp__stats div { padding: 12px 16px; } .pp__stats div + div { border-left: 1px solid var(--u-line); }
+  .pp__stats span { display: block; color: var(--u-muted); font-size: 12px; } .pp__stats b { font-size: 18px; font-weight: 500; }
+  .pp__note { padding: 12px 16px; border-top: 1px solid var(--u-line); }
+  .pp__note b { font-weight: 500; display: block; } .pp__note p { margin: 2px 0 0; color: var(--u-text-2); }
+  .pp__note span { color: var(--u-muted); font-size: 12px; }
+
+  /* A wide but short window (a laptop at 125% display scaling is about 1536x718) holds less than the
+     708px a section plans for, and a fixed one-screen height would lay the section's last rows over
+     the next one. As system.css already does from 640 to 1279px wide: a section keeps at least its
+     screens and grows past them rather than overlap. Where the content fits, nothing changes. */
+  @media (min-width: 1280px) {
+    main > :is(section, .section):not(.hero), footer.closing {
+      height: auto; min-height: calc(var(--h, 1) * 100vh); min-height: calc(var(--h, 1) * 100svh);
+    }
+    :where(main > :is(section, .section):not(.hero), footer.closing) { display: flex; flex-direction: column; }
+    main > :is(section, .section):not(.hero) > .wrap, footer.closing > .wrap { flex: 1 0 auto; height: auto; min-height: 0; }
+  }
+</style>
+</head>
+<body>
+<!-- type: software
+     deal: hero product (the app window on the lit stage), nav nav-centre (dealt nav-cards; no client photographs, so dealt again per sections.md 2),
+           close close-type, footer footer-columns, rhythm space, buttons solid, mark dots, ground sky, palette mint-pink-accounts, type manrope
+     moments: line-carries-colour on #parents (ground-inverse) -->
+
+<header class="nav nav--centre">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo" href="#top"><span class="mark" data-mark="dots" aria-hidden="true"></span>Ishurio</a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item"><a class="nav__link" href="#features">Features</a></div>
+      <div class="nav__item"><a class="nav__link" href="#parents">Parents</a></div>
+      <div class="nav__item"><a class="nav__link" href="#questions">Questions</a></div>
+      <div class="nav__item"><a class="nav__link" href="#contact">Contact</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="nav__link" href="/login">Sign in</a>
+      <a class="btn btn--primary" href="mailto:hello@ishurio.example?subject=Ishurio%20demo">Request a demo</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero hero--product" data-enter aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text hero__in">
+      <div class="hero__head">
+        <div>
+          <h1 id="hero-h">School software for schools in Rwanda</h1>
+          <p class="hero__lead">Ishurio keeps the register, marks, fees and parent notices in one web app, with 4 logins: the head, teachers, the bursar and parents.</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="mailto:hello@ishurio.example?subject=Ishurio%20demo">Request a demo<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+          <a class="btn btn--secondary" href="#features">See the features</a>
+        </div>
+      </div>
+      <div class="hero__stage"><div class="stage stage--fade-b">
+        <div class="ui app" role="img" aria-label="Ishurio's attendance screen: the list of classes beside the open register of P4 A, with one pupil late and one absent">
+          <div class="app__bar">
+            <span class="app__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="app__crumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><span class="hide-sm">Attendance</span><span class="hide-sm">/</span><b>P4 A</b></span>
+            <span class="app__search"><svg class="sk-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m21 21-4.3-4.3"/><circle cx="11" cy="11" r="8"/></svg>Find a pupil</span>
+          </div>
+          <div class="app__pane app__pane--list">
+            <div class="pane__head"><span class="pane__title">Classes</span><span class="pane__meta">Tuesday 17 Nov</span></div>
+            <div class="cls"><span class="cls__tag">P1</span><span class="cls__who">P1 A<span>Teacher Ingabire · 31 pupils</span></span><span class="chip chip--done">Taken</span></div>
+            <div class="cls"><span class="cls__tag">P2</span><span class="cls__who">P2 A<span>Teacher Habimana · 29 pupils</span></span><span class="chip chip--done">Taken</span></div>
+            <div class="cls"><span class="cls__tag">P3</span><span class="cls__who">P3 A<span>Teacher Nshuti · 33 pupils</span></span><span class="chip chip--done">Taken</span></div>
+            <div class="cls is-open"><span class="cls__tag">P4</span><span class="cls__who">P4 A<span>Teacher Mutoni · 8 pupils</span></span><span class="chip">Open</span></div>
+            <div class="cls"><span class="cls__tag">P5</span><span class="cls__who">P5 A<span>Teacher Kalisa · 8 pupils</span></span><span class="chip">Not taken</span></div>
+            <div class="cls"><span class="cls__tag">P6</span><span class="cls__who">P6 A<span>Teacher Uwera · 8 pupils</span></span><span class="chip">Not taken</span></div>
+            <div class="cls"><span class="cls__tag">S1</span><span class="cls__who">S1 A<span>Teacher Mugisha · 40 pupils</span></span><span class="chip chip--done">Taken</span></div>
+            <div class="cls"><span class="cls__tag">S1</span><span class="cls__who">S1 B<span>Teacher Iradukunda · 38 pupils</span></span><span class="chip">Not taken</span></div>
+            <div class="cls"><span class="cls__tag">S2</span><span class="cls__who">S2 A<span>Teacher Mukamana · 36 pupils</span></span><span class="chip chip--done">Taken</span></div>
+          </div>
+          <div class="app__pane app__pane--open">
+            <div class="pane__head"><span class="pane__title">P4 A register</span><span class="pane__meta">6 present · 1 late · 1 absent</span></div>
+            <div class="reg"><span>Patrick Habimana</span><span class="reg__seg"><span class="on-p">Present</span><span>Late</span><span>Absent</span><span>Excused</span></span></div>
+            <div class="reg"><span>Divine Ingabire</span><span class="reg__seg"><span class="on-p">Present</span><span>Late</span><span>Absent</span><span>Excused</span></span></div>
+            <div class="reg"><span>David Iradukunda</span><span class="reg__seg"><span>Present</span><span class="on-l">Late</span><span>Absent</span><span>Excused</span></span></div>
+            <div class="reg"><span>Olivier Mugisha</span><span class="reg__seg"><span class="on-p">Present</span><span>Late</span><span>Absent</span><span>Excused</span></span></div>
+            <div class="reg"><span>Grace Mukamana</span><span class="reg__seg"><span>Present</span><span>Late</span><span class="on-a">Absent</span><span>Excused</span></span></div>
+            <div class="reg"><span>Sandrine Niyonsaba</span><span class="reg__seg"><span class="on-p">Present</span><span>Late</span><span>Absent</span><span>Excused</span></span></div>
+            <div class="reg"><span>Eric Nshuti</span><span class="reg__seg"><span class="on-p">Present</span><span>Late</span><span>Absent</span><span>Excused</span></span></div>
+            <div class="reg"><span>Claudine Uwase</span><span class="reg__seg"><span class="on-p">Present</span><span>Late</span><span>Absent</span><span>Excused</span></span></div>
+            <div class="pane__foot"><span class="pane__meta">Marked by Teacher Mutoni</span><span class="ui-btn">Save register</span></div>
+          </div>
+        </div>
+      </div></div>
+    </div></div>
+  </section>
+
+  <section class="section" id="schools" aria-labelledby="schools-h">
+    <div class="wrap">
+      <div class="grid">
+        <div class="span-5 stack-6">
+          <div class="section-head">
+            <h2 id="schools-h">Made for schools in Rwanda</h2>
+            <p>Ishurio follows how primary and secondary schools here already run: three terms a year, fees in Rwandan francs and parents who read notices by SMS.</p>
+          </div>
+          <ul class="rows">
+            <li><span class="rows__name">Fees in Rwandan francs</span></li>
+            <li><span class="rows__name">Kinyarwanda on the report card</span></li>
+            <li><span class="rows__name">Mobile money, cash or bank</span></li>
+          </ul>
+        </div>
+        <div class="frame frame--photo frame--split span-6 start-7 sc-photo">
+          <img class="frame__img" src="assets/img/photo-f26709565.webp" srcset="assets/img/photo-f26709565-500.webp 500w, assets/img/photo-f26709565-960.webp 960w, assets/img/photo-f26709565.webp 1280w" sizes="(max-width: 1023px) 100vw, 1280px" width="1280" height="928" alt="A teacher helps primary pupils in blue-checked uniforms working on green laptops at wooden desks" loading="lazy" decoding="async" data-source="stand-in" data-subject="primary classroom in Rwanda">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section g2" id="features" aria-labelledby="features-h">
+    <div class="wrap">
+      <div class="group">
+        <div class="section-head">
+          <h2 id="features-h">Run the school day from one app. <span class="muted">Marks, report cards, fees and notices.</span></h2>
+        </div>
+        <div class="grid">
+          <article class="card card--row card--open span-6 m-nolift">
+            <h3>Class rankings out of 100</h3>
+            <p>Teachers enter one subject at a time, out of 100. The class list re-ranks as each score is saved.</p>
+            <div class="panel">
+              <div class="stage stage--fade-b"><div class="at-rise fit" style="--fit-max:400px;--ax:max(24px, 50% - 200px);--ay:48px;--ay-sm:16px">
+                <div class="ui sk" role="img" aria-label="P4 A ranking for Term 1 2026, with averages and grades">
+                  <div class="sk__head"><b>P4 A ranking</b><span>Term 1 2026 · all subjects</span></div>
+                  <div class="sk__row sk__row--th"><span class="n">#</span><span>Pupil</span><span class="v">Average</span><span class="g">Grade</span></div>
+                  <div class="sk__row"><span class="n">1</span><span>Claudine Uwase</span><span class="v">71.8</span><span class="g">B</span></div>
+                  <div class="sk__row"><span class="n">2</span><span>David Iradukunda</span><span class="v">70.6</span><span class="g">B</span></div>
+                  <div class="sk__row is-mark sm-off"><span class="n">3</span><span>Divine Ingabire</span><span class="v">70.2</span><span class="g">B</span></div>
+                  <div class="sk__row sm-off"><span class="n">4</span><span>Olivier Mugisha</span><span class="v">69.8</span><span class="g">C</span></div>
+                  <div class="sk__row sm-off"><span class="n">5</span><span>Patrick Habimana</span><span class="v">65.0</span><span class="g">C</span></div>
+                  <div class="sk__row sm-off"><span class="n">6</span><span>Sandrine Niyonsaba</span><span class="v">58.4</span><span class="g">D</span></div>
+                  <div class="sk__row sm-off"><span class="n">7</span><span>Grace Mukamana</span><span class="v">56.8</span><span class="g">D</span></div>
+                  <div class="sk__row sm-off"><span class="n">8</span><span>Eric Nshuti</span><span class="v">55.9</span><span class="g">D</span></div>
+                </div>
+              </div></div>
+            </div>
+          </article>
+          <article class="card card--row card--open span-6 m-nolift">
+            <h3>Report cards for every school term</h3>
+            <p>Scores, grades A to F, class position and days present for the term, ready to print or save as a PDF.</p>
+            <div class="panel">
+              <div class="stage stage--fade-b"><div class="at-corner" style="--ax:32px;--ay:40px;--w:360px">
+                <div class="ui sk" style="width:360px" role="img" aria-label="Report card for Claudine Uwase, P4 A, Term 1 2026: average 71.8, grade B, position 1 of 8">
+                  <div class="sk__head"><b>Claudine Uwase</b><span>P4 A · Term 1 2026</span></div>
+                  <div class="sk__kv"><span>Position</span><span>1 of 8</span></div>
+                  <div class="sk__kv"><span>Attendance</span><span>9 of 10 days</span></div>
+                  <div class="sk__kv"><span>Mathematics</span><span>84 · A</span></div>
+                  <div class="sk__kv sm-off"><span>English</span><span>80 · A</span></div>
+                  <div class="sk__kv sm-off"><span>Kinyarwanda</span><span>77 · B</span></div>
+                  <div class="sk__kv sm-off"><span>Science</span><span>62 · C</span></div>
+                  <div class="sk__kv sm-off"><span>Social Studies</span><span>56 · D</span></div>
+                  <div class="sk__total sm-off"><span>Average</span><span>71.8 · B</span></div>
+                  <div class="sk__file sm-off"><img src="assets/icons/pdf.svg" alt=""><div>Report-card-ADM0008.pdf<span>Print or save from the browser</span></div></div>
+                </div>
+              </div></div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card card--row card--open span-6 m-nolift">
+          <h3>School fees and printed receipts</h3>
+          <p>The bursar bills a whole class at once, then records cash, bank or mobile money payments against each invoice.</p>
+          <div class="panel">
+            <div class="stage stage--fade-b"><div class="at-rise fit" style="--fit-max:380px;--ax:max(24px, 50% - 190px);--ay:40px;--ay-sm:16px">
+              <div class="ui sk" role="img" aria-label="The Term 1 fee list of pupils still owing, with Olivier Mugisha's 40,000 RWF mobile money payment just recorded">
+                <div class="sk__head"><b>Still owing · Term 1 2026</b><span>14 invoices</span></div>
+                <div class="sk__paid">Receipt printed: RWF 40,000 by mobile money from Olivier Mugisha</div>
+                <div class="sk__row sk__row--fee is-mark"><span>Olivier Mugisha<em>P4 A</em></span><span class="v">RWF 110,000</span><span class="chip chip--late">Part paid</span></div>
+                <div class="sk__row sk__row--fee sm-off"><span>Aline Uwase<em>P4 A</em></span><span class="v">RWF 110,000</span><span class="chip chip--late">Part paid</span></div>
+                <div class="sk__row sk__row--fee sm-off"><span>Grace Mukamana<em>P4 A</em></span><span class="v">RWF 150,000</span><span class="chip chip--out">Unpaid</span></div>
+                <div class="sk__row sk__row--fee sm-off"><span>Kevin Ingabire<em>P5 A</em></span><span class="v">RWF 100,000</span><span class="chip chip--late">Part paid</span></div>
+                <div class="sk__row sk__row--fee sm-off"><span>Jean Habimana<em>P5 A</em></span><span class="v">RWF 150,000</span><span class="chip chip--out">Unpaid</span></div>
+                <div class="sk__row sk__row--fee sm-off"><span>Divine Nshuti<em>P5 A</em></span><span class="v">RWF 50,000</span><span class="chip chip--late">Part paid</span></div>
+                <div class="sk__row sk__row--fee sm-off"><span>Sandrine Mukamana<em>P5 A</em></span><span class="v">RWF 150,000</span><span class="chip chip--out">Unpaid</span></div>
+                <div class="sk__row sk__row--fee sm-off"><span>Patrick Uwase<em>P6 A</em></span><span class="v">RWF 100,000</span><span class="chip chip--late">Part paid</span></div>
+                <div class="sk__row sk__row--fee sm-off"><span>Ange Mugisha<em>P6 A</em></span><span class="v">RWF 150,000</span><span class="chip chip--out">Unpaid</span></div>
+                <div class="sk__row sk__row--fee sm-off"><span>Eric Iradukunda<em>P6 A</em></span><span class="v">RWF 50,000</span><span class="chip chip--late">Part paid</span></div>
+                <div class="sk__row sk__row--fee sm-off"><span>Claudine Niyonsaba<em>P6 A</em></span><span class="v">RWF 150,000</span><span class="chip chip--out">Unpaid</span></div>
+                <div class="sk__row sk__row--fee sm-off"><span>David Habimana<em>P6 A</em></span><span class="v">RWF 100,000</span><span class="chip chip--late">Part paid</span></div>
+                <div class="sk__row sk__row--fee sm-off"><span>Grace Ingabire<em>P6 A</em></span><span class="v">RWF 150,000</span><span class="chip chip--out">Unpaid</span></div>
+                <div class="sk__row sk__row--fee sm-off"><span>Olivier Nshuti<em>P6 A</em></span><span class="v">RWF 50,000</span><span class="chip chip--late">Part paid</span></div>
+              </div>
+            </div></div>
+          </div>
+        </article>
+        <article class="card card--row card--open span-6 m-nolift">
+          <h3>School notices by SMS</h3>
+          <p>Post a notice to all parents, one class or the staff room, and send it by SMS through Africa's Talking.</p>
+          <div class="panel">
+            <div class="stage stage--fade-b"><div class="at-corner" style="--ax:32px;--ay:40px;--w:380px">
+              <div class="ui sk" style="width:380px" role="img" aria-label="A new notice to the 8 parents of P4 A about sports day, with the SMS switch on">
+                <div class="sk__head"><b>New message</b><span>8 parent phones</span></div>
+                <div class="sk__field"><span>Send to</span><p>Parents of P4 A</p></div>
+                <div class="sk__field sm-off"><span>Title</span><p>Sports day on Friday</p></div>
+                <div class="sk__field sm-off"><span>Message</span><p>Please send your child in sports kit. Gates open at 7:30.</p></div>
+                <div class="sk__toggle"><span>Also send as SMS</span><span class="sk__switch" aria-hidden="true"></span></div>
+                <div class="sk__sent sm-off">Sent this term</div>
+                <div class="pp__note sm-off"><b>P5 A science trip</b><p>Signed consent forms by Thursday.</p><span>P5 A · 8 SMS · 12 Nov</span></div>
+                <div class="pp__note sm-off"><b>Mid-term break</b><p>School closes Friday at 12:00 and opens Monday.</p><span>All parents · 24 SMS · 23 Oct</span></div>
+                <div class="pp__note sm-off"><b>Fees reminder</b><p>Term 1 fees were due on 30 September.</p><span>All parents · 24 SMS · 1 Oct</span></div>
+                <div class="pp__note sm-off"><b>Welcome back to Term 1</b><p>School resumes on 7 September.</p><span>All parents · 24 SMS · 1 Sep</span></div>
+              </div>
+            </div></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-inverse" id="parents" aria-labelledby="parents-h" data-moment="line-carries-colour" data-moment-opts='{"from": "base"}'>
+    <div class="wrap">
+      <div class="grid fill">
+        <div class="span-5 stack-6">
+          <div class="section-head">
+            <h2 id="parents-h">A school login for every parent</h2>
+            <p>Parents see their own children: this term's marks, recent attendance, the fee balance and each notice the school sends.</p>
+          </div>
+          <ul class="rows">
+            <li><span class="rows__name">Opens in the phone's browser, nothing to install</span></li>
+            <li><span class="rows__name">Report cards open and print from the same page</span></li>
+            <li><span class="rows__name">Other families' children stay out of view</span></li>
+          </ul>
+          <a class="link" href="#questions">Read the parents' questions</a>
+        </div>
+        <div class="frame frame--split frame--fill span-6 start-7">
+          <div class="stage stage--fade-b"><div class="at-rise fit" style="--fit-max:360px;--ax:max(24px, 50% - 180px);--ay:48px;--ay-sm:24px">
+            <div class="ui sk pp" role="img" aria-label="The parent portal on a phone: Aline Uwase in P4 A, 85% attendance, average 71.8, a balance of 110,000 RWF and a notice about sports day">
+              <div class="sk__head"><b>Your children</b><span>Term 1 2026</span></div>
+              <div class="pp__kid"><b>Aline Uwase</b><span>P4 A · ADM0001</span></div>
+              <div class="pp__stats">
+                <div><span>Attendance</span><b>85%</b></div>
+                <div><span>Average</span><b>71.8 · B</b></div>
+              </div>
+              <div class="sk__kv" style="border-top:1px solid var(--u-line);padding-top:12px;padding-bottom:12px"><span>Fee balance</span><span class="chip chip--out">RWF 110,000</span></div>
+              <div class="pp__note"><b>Sports day on Friday</b><p>Please send your child in sports kit.</p><span>Teacher Mutoni · 17 Nov</span></div>
+              <div class="pp__note"><b>Welcome back to Term 1</b><p>Fees are due by 30 September.</p><span>School office · 7 Sep</span></div>
+              <div class="sk__sent">Marks this term</div>
+              <div class="sk__kv"><span>Mathematics</span><span>84 · A</span></div>
+              <div class="sk__kv"><span>English</span><span>80 · A</span></div>
+              <div class="sk__kv"><span>Kinyarwanda</span><span>77 · B</span></div>
+              <div class="sk__kv"><span>Science</span><span>62 · C</span></div>
+            </div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="questions" aria-labelledby="questions-h" style="--hm: 2">
+    <div class="wrap">
+      <div class="grid">
+        <div class="section-head span-5">
+          <h2 id="questions-h">Questions from head teachers</h2>
+        </div>
+        <div class="span-6 start-7 stack-4">
+          <p class="t-lead">Anything not answered here, ask us during the demo.</p>
+          <a class="link" href="mailto:hello@ishurio.example?subject=Ishurio%20question">Email us a question</a>
+        </div>
+      </div>
+      <div class="grid q-list">
+        <div class="faq span-6">
+          <div class="faq__item"><h3><svg class="q-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></svg>Does Ishurio work on a phone?</h3><p>Yes. Ishurio runs in the browser, so teachers mark the register and parents check marks on any phone with internet.</p></div>
+          <div class="faq__item"><h3><svg class="q-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg>Can parents pay fees through Ishurio?</h3><p>Not yet. The bursar records each mobile money, cash or bank payment, and Ishurio prints the receipt and updates the balance.</p></div>
+          <div class="faq__item"><h3><svg class="q-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2zM7 11h10M7 15h6M7 7h8"/></svg>How does Ishurio send SMS notices?</h3><p>Through your school's Africa's Talking account. Without one, notices still reach parents in their portal.</p></div>
+          <div class="faq__item"><h3><svg class="q-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 21v-3a2 2 0 0 0-4 0v3m8-16.067V21M4 6l7.106-3.79a2 2 0 0 1 1.788 0L20 6"/><path d="m6 11-3.52 2.147a1 1 0 0 0-.48.854V19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a1 1 0 0 0-.48-.853L18 11M6 4.933V21"/><circle cx="12" cy="9" r="2"/></svg>Does each school get its own Ishurio?</h3><p>Yes. Every school runs on its own database, so no other school sees your pupils, marks or fees.</p></div>
+        </div>
+        <div class="faq span-6">
+          <div class="faq__item"><h3><svg class="q-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M16 3.128a4 4 0 0 1 0 7.744M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>Which school staff can change marks and fees?</h3><p>Teachers take attendance and enter marks. The bursar handles invoices and payments. Only the administrator manages users, classes and terms.</p></div>
+          <div class="faq__item"><h3><svg class="q-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10 9H8m8 4H8m8 4H8"/></svg>Which grades do Ishurio report cards use?</h3><p>A from 80, B from 70, C from 60, D from 50, E from 40 and F below. Position is ranked by the average across subjects.</p></div>
+          <div class="faq__item"><h3><svg class="q-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Can school teachers see fee balances?</h3><p>No. The fee pages open only for the bursar and the administrator.</p></div>
+          <div class="faq__item"><h3><svg class="q-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>What happens when a school term ends?</h3><p>The administrator adds the next term and marks it current. Marks and fees from earlier terms stay on each pupil's record.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--type">
+      <div class="section-head">
+        <h2 id="close-h">See Ishurio with your own classes</h2>
+      </div>
+      <a class="btn btn--primary btn--xl btn--wide" href="mailto:hello@ishurio.example?subject=Ishurio%20demo">Request a demo<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="#top"><span class="mark" data-mark="dots" aria-hidden="true"></span>Ishurio</a>
+          <p class="footer__lede">The register, marks and fees in one place.</p>
+        </div>
+        <div class="span-2 footer__col"><h3>Features</h3><ul><li><a href="#features">Report cards</a></li><li><a href="#features">Fees</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Parents</h3><ul><li><a href="#parents">Parent portal</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Questions</h3><ul><li><a href="#questions">Head teachers</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Contact</h3><ul><li><a href="/login">Sign in</a></li><li><a href="mailto:hello@ishurio.example">Email us</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Ishurio</span>
+        <div class="socials"></div>
+        <a class="credits" href="credits.html">Photographs via Wikimedia Commons</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+{
+ "note": "Credits for the photographs in this folder: photos.mjs credits prints the footer block for the ones the pages use.",
+ "photos": [
+  {
+   "file": "photo-f143672254.webp",
+   "files": [
+    "photo-f143672254-500.webp",
+    "photo-f143672254-960.webp",
+    "photo-f143672254.webp"
+   ],
+   "id": "f143672254",
+   "alt": "Reading wikipedia in classroom rwanda 1",
+   "by": "Rumuri Rutazima",
+   "licence": "CC BY 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Reading_wikipedia_in_classroom_rwanda_1.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f190437068.webp",
+   "files": [
+    "photo-f190437068-500.webp",
+    "photo-f190437068-960.webp",
+    "photo-f190437068.webp"
+   ],
+   "id": "f190437068",
+   "alt": "G.S Gishari Classroom Event",
+   "by": "NTNLWKR",
+   "licence": "CC0",
+   "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:G.S_Gishari_Classroom_Event.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f104706092.webp",
+   "files": [
+    "photo-f104706092-500.webp",
+    "photo-f104706092-960.webp",
+    "photo-f104706092.webp"
+   ],
+   "id": "f104706092",
+   "alt": "Sitting arrangement in class in Rwanda",
+   "by": "Claude Nizeyimana",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Sitting_arrangement_in_class_in_Rwanda.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f26709565.webp",
+   "files": [
+    "photo-f26709565-500.webp",
+    "photo-f26709565-960.webp",
+    "photo-f26709565.webp"
+   ],
+   "id": "f26709565",
+   "alt": "OLPC classroom teaching",
+   "by": "RudolfSimon",
+   "licence": "CC BY-SA 3.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:OLPC_classroom_teaching.JPG",
+   "source": "Wikimedia Commons"
+  }
+ ]
+}
